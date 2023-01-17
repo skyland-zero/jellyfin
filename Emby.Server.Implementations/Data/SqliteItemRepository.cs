@@ -690,7 +690,13 @@ namespace Emby.Server.Implementations.Data
                 saveItemStatement.TryBindNull("@data");
             }
 
-            saveItemStatement.TryBind("@Path", GetPathToSave(item.Path));
+            var path = GetPathToSave(item.Path);
+            saveItemStatement.TryBind("@Path", path);
+
+            if (path != null && item.Name != path && type.FullName != "MediaBrowser.Controller.Entities.CollectionFolder")
+            {
+                item.Name = path.Split("/").LastOrDefault();
+            }
 
             if (item is IHasStartDate hasStartDate)
             {
