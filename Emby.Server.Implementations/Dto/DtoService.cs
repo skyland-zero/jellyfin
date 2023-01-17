@@ -118,6 +118,9 @@ namespace Emby.Server.Implementations.Dto
                     }
                 }
 
+                // TODO 处理Name为文件路径存储的名字
+                dto.Name = item.Path != null ? item.Path.Split("/").LastOrDefault() : dto.Name;
+
                 returnItems[index] = dto;
             }
 
