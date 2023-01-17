@@ -1,4 +1,4 @@
-name: actions
+name: BuildDockerImage
 
 on: [push, pull_request] # 触发事件
 
